@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { WeddingSite } from "@/components/wedding/Wedding";
 import { wedding } from "@/config/wedding";
 
-const title = "Sai Kiran & Teja Sree — Wedding Invitation · 12 Dec 2026";
-const description = "Join us for the wedding of Sai Kiran Reddy and Teja Sree at SS Convention Hall, Mylavaram. Muhurtham 7:29 PM IST, 12 December 2026.";
+const title = "Sharan & Revathi — Wedding Invitation · 14 Dec 2026";
+const description = `Join us for the wedding of ${wedding.groom.short} and ${wedding.bride.short} at ${wedding.venue.name}, ${wedding.venue.city}. Muhurtham ${wedding.muhurthamTime}, ${wedding.displayDate}.`;
 
 export const Route = createFileRoute("/")({
   head: () => ({

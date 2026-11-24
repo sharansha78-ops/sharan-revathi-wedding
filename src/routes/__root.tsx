@@ -81,10 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sai Kiran & Teja Sree — Wedding Invitation" },
+      { title: "Sharan & Revathi — Wedding Invitation" },
       {
         name: "description",
-        content: "Wedding invitation of Sai Kiran Reddy and Teja Sree, 12 December 2026.",
+        content: "Wedding invitation of Sharan & Revathi, 14 December 2026.",
       },
     ],
     links: [
