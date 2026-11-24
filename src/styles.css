@@ -1,0 +1,1459 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-maroon: var(--maroon);
+  --color-maroon-deep: var(--maroon-deep);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-sky: var(--sky);
+  --font-script: "Luxurious Script", cursive;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-display: "Abhaya Libre", serif;
+  --font-telugu: "Noto Serif Telugu", serif;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --maroon: oklch(0.36 0.13 22);
+  --maroon-deep: oklch(0.24 0.09 20);
+  --gold: oklch(0.74 0.12 80);
+  --gold-soft: oklch(0.86 0.08 85);
+  --ivory: oklch(0.97 0.02 85);
+  --sky: oklch(0.72 0.13 240);
+  --gradient-gold: linear-gradient(
+    135deg,
+    oklch(0.62 0.11 70),
+    oklch(0.88 0.1 88),
+    oklch(0.62 0.11 70)
+  );
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-serif);
+    background: var(--ivory);
+    color: var(--maroon-deep);
+  }
+}
+@utility text-gold-grad {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility parchment {
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      color-mix(in oklab, var(--gold) 25%, transparent) 100%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in oklab, var(--gold) 6%, transparent) 0 2px,
+      transparent 2px 9px
+    );
+}
+@utility gold-border {
+  border: 1px solid var(--gold);
+  box-shadow:
+    0 0 0 4px var(--ivory),
+    0 0 0 5px var(--gold),
+    0 20px 40px -20px color-mix(in oklab, var(--maroon) 40%, transparent);
+}
+
+:root {
+  --invitation-paper: oklch(0.94 0.025 85);
+  --invitation-ink: oklch(0.3 0.1 15);
+  --invitation-gold: oklch(0.79 0.09 80);
+  --invitation-blue: oklch(0.59 0.12 240);
+  --invitation-white: oklch(0.99 0.006 85);
+}
+body {
+  margin: 0;
+  background: var(--invitation-paper);
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--invitation-blue);
+  outline-offset: 5px;
+}
+.invitation-site {
+  overflow: clip;
+  color: var(--invitation-ink);
+  container-type: inline-size;
+}
+/* Dynamic viewport follows Safari's collapsing toolbar; scroll runway stays stable. */
+.invitation-site {
+  --visible-viewport: 100vh;
+}
+@supports (height: 100dvh) {
+  .invitation-site {
+    --visible-viewport: 100dvh;
+  }
+}
+.hero-scene {
+  position: relative;
+  height: calc(var(--visible-viewport) + 45svh);
+  background: oklch(0.63 0.17 257);
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: var(--visible-viewport);
+  overflow: hidden;
+}
+.hero-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.hero-temple {
+  position: absolute;
+  width: 76%;
+  height: 135%;
+  left: 12%;
+  bottom: -3%;
+  object-fit: fill;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+.hero-tree {
+  position: absolute;
+  width: 101%;
+  height: 149%;
+  left: -0.5%;
+  bottom: -70%;
+  object-fit: fill;
+  transform-origin: center bottom;
+}
+.hero-names {
+  position: absolute;
+  top: 7.5%;
+  left: 5%;
+  width: 90%;
+  text-align: center;
+  color: var(--invitation-white);
+}
+.hero-names h1 {
+  font-family: "Asul", serif;
+  font-size: min(10.8vw, 11svh);
+  line-height: 1.29;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.hero-names span {
+  display: block;
+  font:
+    400 clamp(12px, 1.8vw, 22px)/1.2 "Jost",
+    sans-serif;
+  color: var(--invitation-paper);
+  margin: 1.5cqw 0 3cqw;
+}
+.hero-announcement {
+  position: absolute;
+  bottom: 7%;
+  width: 100%;
+  text-align: center;
+  color: var(--invitation-paper);
+  font:
+    400 12px "Jost",
+    sans-serif;
+  letter-spacing: 0.35em;
+}
+.illustrated-panel {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+}
+.panel-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+.invitation-panel,
+.story-panel {
+  aspect-ratio: 9 / 16;
+}
+.invitation-copy {
+  position: absolute;
+  inset: 20% 20% 12%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Abhaya Libre", serif;
+  color: oklch(0.47 0.005 85);
+}
+.ganesha {
+  width: 9cqw;
+  height: 9cqw;
+  object-fit: contain;
+}
+.invitation-copy .blessing {
+  font-size: 1.3cqw;
+  color: oklch(0.65 0.1 350);
+  margin-top: 1.2cqw;
+}
+.invitation-intro {
+  font-size: 2.2cqw;
+  line-height: 1.2;
+  margin-top: 4cqw;
+}
+.invitation-copy h2 {
+  font:
+    400 17cqw/1.1 "Luxurious Script",
+    cursive;
+  color: var(--invitation-blue);
+  margin: 4cqw 0 2cqw;
+}
+.groom-family {
+  font-size: 1.7cqw;
+  line-height: 1.4;
+}
+.invitation-copy h3 {
+  font:
+    400 9cqw/1.2 "Junge",
+    serif;
+  color: var(--invitation-gold);
+  text-transform: uppercase;
+  margin-top: 4cqw;
+  white-space: nowrap;
+}
+.couple-amp {
+  font:
+    400 5.5cqw/1.2 "Instrument Serif",
+    serif;
+  color: var(--invitation-blue);
+  margin-top: 1cqw;
+}
+.couple-amp + h3 {
+  margin-top: 1cqw;
+}
+.bride-family {
+  font-size: 1.9cqw;
+  line-height: 1.3;
+  margin-top: 4cqw;
+}
+.invitation-copy h4 {
+  font:
+    700 3cqw/1.2 "EB Garamond",
+    serif;
+  color: var(--invitation-blue);
+  margin-top: 6cqw;
+}
+.events-panel {
+  padding: 9cqw 4.5cqw;
+  background-size: 100% 100%;
+}
+.event-card {
+  position: relative;
+  padding: 2cqw;
+  border: 0.6cqw double oklch(0.48 0.13 260);
+  outline: 0.25cqw solid var(--invitation-gold);
+  outline-offset: -0.65cqw;
+  border-radius: 3.5cqw;
+  background: var(--invitation-white);
+  box-shadow: 0 0 0 2cqw oklch(0.95 0.015 245 / 0.9);
+  font-family: "Jost", sans-serif;
+}
+.event-couple {
+  color: var(--invitation-blue);
+  font-size: 1.7cqw;
+  margin-bottom: 1cqw;
+}
+.event-layout {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 3cqw;
+}
+.event-photo {
+  position: relative;
+  padding: 1.2cqw;
+  border: 0.4cqw double var(--invitation-blue);
+  outline: 0.15cqw solid var(--invitation-gold);
+  border-radius: 2cqw;
+}
+.event-photo > img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+.event-navigation {
+  position: absolute;
+  bottom: 2cqw;
+  left: 2cqw;
+  right: 2cqw;
+  display: flex;
+  gap: 1cqw;
+  align-items: center;
+}
+.event-navigation > button {
+  width: 4.5cqw;
+  height: 4.5cqw;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--invitation-paper);
+  color: var(--invitation-blue);
+  box-shadow: 0 2px 5px oklch(0.2 0 0 / 0.25);
+}
+.event-navigation svg {
+  width: 1.6cqw;
+}
+.event-dots {
+  display: flex;
+  gap: 0.7cqw;
+  margin-left: auto;
+}
+.event-dots button {
+  width: 1cqw;
+  height: 1cqw;
+  border-radius: 10px;
+  background: var(--invitation-paper);
+}
+.event-dots button[aria-pressed="true"] {
+  width: 2cqw;
+  background: var(--invitation-blue);
+}
+.event-copy {
+  color: oklch(0.27 0.025 70);
+}
+.event-copy h2 {
+  font:
+    700 5.8cqw/1.05 "Philosopher",
+    sans-serif;
+}
+.event-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1cqw 2cqw;
+  margin: 2cqw 0;
+}
+.event-details p {
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+  font-size: 1.65cqw;
+}
+.event-details svg {
+  color: var(--invitation-blue);
+  width: 1.6cqw;
+  height: 1.6cqw;
+  flex-shrink: 0;
+}
+.event-telugu {
+  font-size: 1.8cqw;
+  margin-bottom: 3cqw;
+}
+.location-button {
+  display: inline-block;
+  padding: 1.3cqw 2.3cqw;
+  border-radius: 40px;
+  border: 1px solid var(--invitation-gold);
+  background: oklch(0.35 0.13 270);
+  color: var(--invitation-white);
+  font-size: 1.6cqw;
+}
+
+.couple-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.couple-temple,
+.couple-cutout {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+.floating-cloud {
+  position: absolute;
+  width: 55%;
+  top: -12%;
+}
+.cloud-right {
+  top: -2%;
+}
+.story-heading {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  text-align: center;
+  color: var(--invitation-gold);
+}
+.story-heading p {
+  font:
+    400 3.3cqw/1.3 "Instrument Serif",
+    serif;
+  color: var(--invitation-paper);
+}
+.story-heading h2 {
+  font:
+    400 5cqw/1.3 "Luxurious Script",
+    cursive;
+  margin-top: 1cqw;
+}
+.story-copy {
+  position: absolute;
+  top: 20%;
+  left: 21%;
+  width: 58%;
+  text-align: center;
+}
+.story-copy h2 {
+  font:
+    400 6.5cqw/1.1 "Luxurious Script",
+    cursive;
+  color: var(--invitation-gold);
+  margin-bottom: 4cqw;
+}
+.story-copy p {
+  font:
+    400 1.65cqw/1.3 "Jost",
+    sans-serif;
+}
+.story-gallery {
+  position: absolute;
+  top: 41%;
+  left: 35%;
+  width: 30%;
+  aspect-ratio: 1492/1998;
+}
+.gallery-photo-window {
+  position: absolute;
+  inset: 9% 13%;
+  overflow: hidden;
+}
+.gallery-photo-window img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-gold-frame {
+  position: absolute;
+  max-width: none;
+  width: 134%;
+  height: 74.67%;
+  top: 12.67%;
+  left: -17%;
+  transform: rotate(90deg);
+  pointer-events: none;
+}
+.story-gallery button {
+  position: absolute;
+  top: 45%;
+  border-radius: 50%;
+  background: oklch(0.94 0.025 85 / 0.85);
+  padding: 0.5cqw;
+  color: var(--invitation-ink);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.story-gallery:hover button,
+.story-gallery:focus-within button {
+  opacity: 1;
+}
+.story-gallery button svg {
+  width: 2cqw;
+  height: 2cqw;
+}
+.gallery-prev {
+  left: -4cqw;
+}
+.gallery-next {
+  right: -4cqw;
+}
+.rsvp-panel {
+  aspect-ratio: 1.6;
+}
+.rsvp-copy {
+  position: absolute;
+  top: 20%;
+  left: 33%;
+  width: 34%;
+  text-align: center;
+}
+.rsvp-copy h2 {
+  font:
+    400 3.4cqw/1 "Instrument Serif",
+    serif;
+}
+.rsvp-copy h2 span {
+  font-style: italic;
+}
+.rsvp-copy > p {
+  font:
+    400 1.4cqw/1.25 "Jost",
+    sans-serif;
+  margin: 4.5cqw 0 3cqw;
+}
+.rsvp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1cqw;
+  padding: 1.3cqw 2cqw;
+  background: var(--invitation-ink);
+  color: var(--invitation-white);
+  border-radius: 1cqw;
+  font:
+    500 1.7cqw "Jost",
+    sans-serif;
+}
+.rsvp-button svg {
+  width: 2cqw;
+}
+.rsvp-copy small {
+  display: block;
+  margin-top: 1cqw;
+  font:
+    400 1.2cqw "Jost",
+    sans-serif;
+}
+.instagram-panel {
+  aspect-ratio: 1.6;
+}
+.instagram-copy {
+  position: absolute;
+  top: 20%;
+  left: 22%;
+  width: 56%;
+  text-align: center;
+}
+.instagram-copy h2 {
+  font:
+    400 5cqw/1.2 "Luxurious Script",
+    cursive;
+}
+.instagram-copy > p {
+  font:
+    400 4cqw/1.2 "Instrument Serif",
+    serif;
+  margin-top: 3cqw;
+}
+.instagram-photos {
+  display: flex;
+  justify-content: center;
+  margin-top: 2cqw;
+}
+.instagram-photos img {
+  width: 5.5cqw;
+  height: 6cqw;
+  object-fit: cover;
+  border: 0.3cqw solid var(--invitation-white);
+  border-radius: 0.8cqw;
+}
+.instagram-photos img:first-child {
+  transform: rotate(-12deg);
+}
+.instagram-photos img:last-child {
+  transform: rotate(12deg);
+}
+.instagram-button {
+  display: inline-flex;
+  gap: 1cqw;
+  align-items: center;
+  padding: 1cqw 2cqw;
+  border-radius: 1cqw;
+  color: var(--invitation-white);
+  background: var(--invitation-ink);
+  font:
+    400 1.5cqw "Jost",
+    sans-serif;
+  margin-top: 2cqw;
+}
+.instagram-button svg {
+  width: 2cqw;
+}
+.finale-panel {
+  aspect-ratio: 1872/3344;
+}
+.finale-copy {
+  position: absolute;
+  inset: 6% 10% 0;
+  text-align: center;
+}
+.finale-copy h2 {
+  font:
+    400 6cqw/1.2 "Luxurious Script",
+    cursive;
+}
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2cqw;
+  margin: 3cqw 0;
+  font:
+    400 4.5cqw "Instrument Serif",
+    serif;
+}
+.countdown span + span::before {
+  content: ":";
+  margin-right: 2cqw;
+}
+.countdown small {
+  font-size: 1.7cqw;
+  margin-left: 0.6cqw;
+}
+.finale-date {
+  font:
+    400 2cqw/1.5 "Jost",
+    sans-serif;
+}
+.finale-map {
+  display: inline-block;
+  margin-top: 16cqw;
+  font:
+    400 4cqw/1.3 "Instrument Serif",
+    serif;
+}
+.finale-map span {
+  font:
+    400 6cqw/1.3 "Luxurious Script",
+    cursive;
+}
+.finale-map small {
+  display: block;
+  font:
+    400 1.8cqw "Jost",
+    sans-serif;
+  margin: 2cqw 0;
+}
+.finale-map svg {
+  margin: 2cqw auto;
+  width: 3cqw;
+  height: 3cqw;
+}
+.finale-names {
+  font:
+    400 6cqw "Luxurious Script",
+    cursive;
+  margin-top: 30cqw;
+}
+.music-control {
+  --music-inset: clamp(12px, 3vw, 24px);
+  position: fixed;
+  z-index: 40;
+  bottom: max(var(--music-inset), env(safe-area-inset-bottom));
+  left: max(var(--music-inset), env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 6px 16px 6px 6px;
+  border: 1px solid var(--invitation-gold);
+  border-radius: 999px;
+  background: linear-gradient(125deg, #692435, #361019);
+  color: #fff6e5;
+  box-shadow: 0 4px 18px #2d101956;
+  text-align: left;
+}
+.music-control:hover {
+  background: linear-gradient(125deg, #7c3043, #461820);
+}
+.music-control:focus-visible {
+  outline-color: #fff1c2;
+  box-shadow: 0 0 0 5px #361019;
+}
+.music-control-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  height: 40px;
+  border: 1px solid #ffdf9f;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffe7ad, #d5a353);
+  color: #4c1b27;
+}
+.music-control-sparkle {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+.music-control-label {
+  min-width: 54px;
+  font:
+    500 14px/1.15 "Jost",
+    sans-serif;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .music-control[data-intro="true"] .music-control-icon::after {
+    position: absolute;
+    inset: -1px;
+    border: 1px solid #ffe7ad;
+    border-radius: inherit;
+    content: "";
+    animation: music-invitation-pulse 1.6s ease-out 0.5s both;
+  }
+}
+@keyframes music-invitation-pulse {
+  from {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.32);
+  }
+}
+@media (max-width: 600px) {
+  .hero-names {
+    top: 12%;
+  }
+  .hero-names h1 {
+    font-size: 12cqw;
+  }
+  .hero-names span {
+    margin: 4cqw 0;
+  }
+  .hero-temple {
+    width: 110%;
+    left: -5%;
+    height: 110%;
+    bottom: -1%;
+  }
+  .hero-tree {
+    width: 130%;
+    left: -15%;
+    height: 110%;
+    bottom: -25%;
+  }
+  .hero-announcement {
+    font-size: 9px;
+  }
+  .invitation-panel {
+    aspect-ratio: 9/18;
+  }
+  .invitation-copy {
+    top: 19%;
+    left: 17%;
+    right: 17%;
+  }
+  .invitation-intro {
+    font-size: 2.8cqw;
+  }
+  .groom-family {
+    font-size: 2.3cqw;
+  }
+  .bride-family {
+    font-size: 2.4cqw;
+  }
+  .invitation-copy .blessing {
+    font-size: 1.8cqw;
+  }
+  .invitation-copy h4 {
+    margin-top: 5cqw;
+  }
+  .events-panel {
+    padding: 10cqw 6cqw;
+  }
+  .event-card {
+    padding: 3cqw;
+  }
+  .event-layout {
+    grid-template-columns: 1fr;
+  }
+  .event-couple {
+    font-size: 3cqw;
+  }
+  .event-photo {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .event-copy {
+    text-align: center;
+    padding: 2cqw 1cqw;
+  }
+  .event-copy h2 {
+    font-size: 7cqw;
+  }
+  .event-details {
+    justify-content: center;
+  }
+  .event-details p {
+    font-size: 3cqw;
+  }
+  .event-details svg {
+    width: 3cqw;
+    height: 3cqw;
+  }
+  .event-telugu {
+    font-size: 3cqw;
+  }
+  .location-button {
+    font-size: 3cqw;
+    padding: 2cqw 4cqw;
+  }
+  .event-navigation > button {
+    width: 7cqw;
+    height: 7cqw;
+  }
+  .event-navigation svg {
+    width: 3cqw;
+  }
+  .event-dots button {
+    width: 2cqw;
+    height: 2cqw;
+  }
+  .event-dots button[aria-pressed="true"] {
+    width: 4cqw;
+  }
+  .story-copy {
+    left: 20%;
+    width: 60%;
+    top: 21%;
+  }
+  .story-copy p {
+    font-size: 2.3cqw;
+  }
+  .story-copy h2 {
+    margin-bottom: 2cqw;
+  }
+  .story-gallery {
+    top: 43%;
+    width: 29%;
+    left: 35.5%;
+  }
+  .story-gallery button {
+    opacity: 1;
+  }
+  .story-gallery button svg {
+    width: 3cqw;
+    height: 3cqw;
+  }
+  .rsvp-panel {
+    aspect-ratio: 1.25;
+  }
+  .rsvp-copy {
+    top: 20%;
+    left: 29%;
+    width: 42%;
+  }
+  .rsvp-copy h2 {
+    font-size: 5cqw;
+  }
+  .rsvp-copy > p {
+    font-size: 2.3cqw;
+    margin: 4cqw 0;
+  }
+  .rsvp-button {
+    font-size: 2.5cqw;
+  }
+  .rsvp-button svg {
+    width: 3cqw;
+  }
+  .rsvp-copy small {
+    font-size: 2cqw;
+  }
+  .instagram-copy h2 {
+    font-size: 7cqw;
+  }
+  .instagram-copy > p {
+    font-size: 5cqw;
+  }
+  .instagram-photos img {
+    width: 7cqw;
+    height: 8cqw;
+  }
+  .finale-date {
+    font-size: 3cqw;
+  }
+  .finale-map small {
+    font-size: 2.6cqw;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+  .hero-scene {
+    height: var(--visible-viewport);
+  }
+  .hero-temple {
+    bottom: -45%;
+  }
+}
+/* Keep longer family names inside the illustrated arch. */
+.groom-family,
+.bride-family {
+  width: 100%;
+}
+.groom-family p,
+.bride-family p {
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+/* A shorter, width-filling wedding tableau keeps the temple visible on entry. */
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1cqw;
+  padding: 2cqw;
+  text-align: center;
+  background: var(--invitation-paper);
+  color: var(--invitation-ink);
+}
+.photo-placeholder span {
+  font-size: 5cqw;
+}
+.photo-placeholder p {
+  font-size: 1.7cqw;
+  line-height: 1.6;
+}
+.wedding-details-panel {
+  padding: clamp(36px, 7vw, 90px) 8%;
+  text-align: center;
+  background: var(--invitation-paper);
+  border-block: 4px double var(--invitation-gold);
+}
+.wedding-details-panel h2 {
+  font:
+    400 clamp(48px, 7vw, 90px)/1.2 "Luxurious Script",
+    cursive;
+}
+.wedding-details-panel h3 {
+  font-size: clamp(20px, 3vw, 32px);
+  margin: 16px 0 28px;
+}
+.wedding-details-panel p {
+  font-size: clamp(14px, 1.8vw, 22px);
+  line-height: 1.8;
+}
+.wedding-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 32px auto;
+  max-width: 960px;
+}
+.wedding-details-grid > div {
+  padding: 20px;
+  border: 1px solid var(--invitation-gold);
+  border-radius: 8px;
+}
+.details-blessing {
+  margin-top: 28px;
+}
+@media (max-width: 600px) {
+  .wedding-details-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+/* The shared temple/couple canvas starts at the full viewport width. */
+
+.hero-names h1 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  font-size: min(10vw, 10svh);
+  line-height: 1.2;
+}
+.hero-names span {
+  font-style: normal;
+  letter-spacing: 0.2em;
+}
+/* Reserve the inner paper area, including the narrower shoulders of each arch. */
+.invitation-copy {
+  left: 25%;
+  right: 25%;
+}
+.invitation-intro {
+  width: 90%;
+  font-size: 2.1cqw;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.groom-family {
+  font-size: 1.8cqw;
+  line-height: 1.45;
+}
+.bride-family {
+  font-size: 1.9cqw;
+  line-height: 1.45;
+}
+.invitation-copy h3 {
+  font-size: 6.2cqw;
+  white-space: normal;
+}
+.story-copy {
+  left: 29%;
+  width: 42%;
+  top: 21%;
+}
+.story-copy p {
+  font-size: 1.8cqw;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+.finale-map .maps-label {
+  display: block;
+  font:
+    500 clamp(12px, 1.8cqw, 22px)/1.4 "Jost",
+    sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 600px) {
+  .hero-names h1 {
+    font-size: 10cqw;
+  }
+  .invitation-copy {
+    left: 25%;
+    right: 25%;
+  }
+  .invitation-intro {
+    font-size: 2.5cqw;
+  }
+  .groom-family,
+  .bride-family {
+    font-size: 2.2cqw;
+    line-height: 1.5;
+  }
+  .invitation-copy h3 {
+    font-size: 6.2cqw;
+  }
+  .story-copy {
+    left: 29%;
+    width: 42%;
+    top: 21%;
+  }
+  .story-copy p {
+    font-size: 2.05cqw;
+    line-height: 1.4;
+  }
+  .story-gallery {
+    top: 46%;
+  }
+}
+/* Keep the ground flush with the following panel throughout the scroll zoom. */
+
+.story-gallery {
+  top: 39%;
+}
+.finale-names {
+  margin-top: 8cqw;
+  font-size: 5.5cqw;
+}
+.finale-map .maps-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  margin: 3cqw auto 0;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--invitation-ink);
+  color: var(--invitation-white);
+  border: 1px solid var(--invitation-gold);
+  box-shadow: 0 4px 12px oklch(0.25 0.05 20 / 0.18);
+}
+.finale-map .maps-button span {
+  font:
+    500 clamp(13px, 1.8cqw, 22px)/1.4 "Jost",
+    sans-serif;
+}
+.finale-map .maps-button svg {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.maps-button:hover {
+  filter: brightness(1.2);
+}
+@media (max-width: 600px) {
+  .story-gallery {
+    top: 42%;
+  }
+  .finale-names {
+    margin-top: 7cqw;
+  }
+}
+
+/* Preserve the reference's full-width portrait composition. On wide screens,
+   scroll through the tall canvas before pinning its bottom for the final zoom. */
+.couple-scene {
+  --scene-height: max(var(--visible-viewport), 163cqw);
+  position: relative;
+  height: calc(var(--scene-height) + 35svh);
+  background: var(--invitation-ink);
+}
+.couple-sticky {
+  position: sticky;
+  top: calc(var(--visible-viewport) - var(--scene-height));
+  height: var(--scene-height);
+  overflow: hidden;
+  isolation: isolate;
+}
+.couple-art-box {
+  position: absolute;
+  bottom: -12cqw;
+  left: 50%;
+  width: 100%;
+  aspect-ratio: 1872 / 3344;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .couple-scene {
+    height: var(--scene-height);
+  }
+  .couple-sticky {
+    position: relative;
+    top: 0;
+  }
+}
+/* Readable event navigation and typography at every breakpoint. */
+.event-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 20px;
+}
+.event-tabs button {
+  font:
+    400 clamp(12px, 1.5cqw, 18px)/1.3 "Jost",
+    sans-serif;
+  padding: 9px 14px;
+  border-radius: 30px;
+  border: 1px solid var(--invitation-gold);
+  color: var(--invitation-ink);
+}
+.event-tabs button[aria-pressed="true"] {
+  background: var(--invitation-ink);
+  color: var(--invitation-white);
+}
+.event-copy h2 {
+  font:
+    400 clamp(32px, 5cqw, 68px)/1.12 "Instrument Serif",
+    Georgia,
+    serif;
+}
+.event-details {
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+.event-details p {
+  font:
+    400 clamp(14px, 1.65cqw, 21px)/1.5 "Jost",
+    sans-serif;
+}
+.event-details svg {
+  width: 18px;
+  height: 18px;
+}
+.event-telugu {
+  font-size: clamp(14px, 1.8cqw, 22px);
+  line-height: 1.6;
+}
+.event-couple {
+  font-size: clamp(13px, 1.7cqw, 21px);
+}
+.livestream-block {
+  margin: 2cqw auto 0;
+  text-align: center;
+}
+.livestream-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: oklch(0.52 0.2 25);
+  color: white;
+  font:
+    500 clamp(12px, 1.8cqw, 20px)/1.3 "Jost",
+    sans-serif;
+}
+.livestream-block p {
+  font:
+    400 clamp(10px, 1.2cqw, 15px)/1.4 "Jost",
+    sans-serif;
+  margin-top: 8px;
+}
+.finale-names {
+  margin-top: 3cqw;
+}
+@media (max-width: 760px) {
+  .event-layout {
+    grid-template-columns: 1fr;
+  }
+  .event-photo {
+    width: min(72%, 340px);
+    margin: auto;
+  }
+  .event-copy {
+    text-align: center;
+  }
+  .event-details {
+    align-items: center;
+  }
+  .event-tabs {
+    justify-content: center;
+  }
+  .event-navigation > button {
+    width: 36px;
+    height: 36px;
+  }
+  .event-navigation svg {
+    width: 16px;
+  }
+  .location-button {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}
+
+/* Explicit depth order: the tower passes in front of the invitation names. */
+.hero-sticky {
+  isolation: isolate;
+}
+.hero-sky {
+  z-index: 0;
+}
+.hero-names {
+  z-index: 1;
+}
+.hero-temple {
+  z-index: 2;
+  height: 105%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.hero-tree {
+  z-index: 3;
+}
+/* Fill tall phone viewports with the artwork; the couple stays inside the
+   central safe area while decorative side columns can extend beyond the edge. */
+@media (max-width: 760px) and (max-aspect-ratio: 3/4) {
+  .couple-art-box {
+    width: min(160cqw, max(100%, calc(var(--visible-viewport) * 0.6135)));
+  }
+}
+/* Top language switcher (Telugu / Tamil) */
+.lang-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 60;
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  background: rgba(58, 18, 24, 0.88);
+  border: 1px solid var(--invitation-gold);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.lang-switcher button {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #fff6e5;
+  font-family: var(--font-telugu);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-switcher button.active {
+  background: var(--invitation-gold);
+  color: #361019;
+}
+
+/* Apply Tamil font when Tamil is selected */
+.font-telugu:lang(ta) {
+  font-family: "Noto Serif Tamil", var(--font-telugu);
+}
+
+.lang-switcher button.active {
+  background: var(--invitation-gold);
+  color: #361019;
+}
+
+/* Apply Tamil font when Tamil is selected */
+.font-telugu:lang(ta) {
+  font-family: "Noto Serif Tamil", var(--font-telugu);
+}

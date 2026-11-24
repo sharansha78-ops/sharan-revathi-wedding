@@ -1,0 +1,63 @@
+{
+  "note": "Original reference artwork preserved under original filenames in public/assets/original. Resolved through src/config/artwork.ts; no generated substitutes.",
+  "sections": {
+    "hero": [
+      "xZKlIX9XaacbmAvyKmu8rqVXE.webp",
+      "J6YiMAQTDPTAlfG2On7An1Q5lB4.webp",
+      "VrdsdVM2OwyjQkw6YWOB0OowTQ.webp"
+    ],
+    "invitation": [
+      "iciTJeQ6Cx2u0gNdZeuKHPf1I.webp",
+      "7Jc7F5U6LjAzdX4ypVkjja74nO8.webp"
+    ],
+    "events": [
+      "D4pzTjtAOLwhyi0UPGweoWoztA.webp",
+      "F2ADq8uKnJWgYF9TX50Ef0rL0U.webp"
+    ],
+    "lower-animated-scene": [
+      "Rt8UBMylAa1Uf8GIPommwOJom8.webp",
+      "hV0sxZSugZ1H4ccFPtXXsbHVi54.webp",
+      "CUxzxi5SNqNa0t77tmEkNmfHc.webp",
+      "sdAKyTg4o5WmZhgAcUR0DbKY.webp"
+    ],
+    "story": [
+      "sc2GPAV2jTrdKAHcfHti42Mz5YE.webp"
+    ],
+    "gallery": [
+      "a6l8leK3Q1bKzvdCCwf3nSzy7E.png",
+      "mpTuXe92kxp4o8MtgrakEGpuQPA.jpeg",
+      "123OKdea8oPhNCq0uetsHB8OcDw.jpeg",
+      "Hroe8U2N75359CjJrk9AA0WAFk.jpeg",
+      "HHhvRybKYYn0bwE2ivhhQVsGc5A.jpeg"
+    ],
+    "instagram": [
+      "f7X3FcEZ4muD31rwPB6wnsMnmsw.webp",
+      "z4FcDC07DapVhAf2xKtlQGU.jpg",
+      "rOJVGWe8W5Nx4kfOdvTCIYo3N30.jpg",
+      "sZJ4c6HdPUPslpxpmOqUaERrJtA.jpg"
+    ],
+    "social-preview": [
+      "zBRd2fZShor1nxxKvdVKhKU.webp"
+    ],
+    "audio": [
+      "mjZh3ISr0YDK01kdBZisCq18TDo.mp3"
+    ],
+    "rsvp": [
+      "6f9AxarIs54UBYT1Lrm4ws9V764.webp"
+    ],
+    "countdown": [
+      "QUYudzcydz5OmxfmIxgjPrFyb6I.png"
+    ]
+  },
+  "missing": {
+    "hero ornament": "7Jc7F5U6LjAzdX4ypVkjja74nO8.webp",
+    "location frame": "a6l8leK3Q1bKzvdCCwf3nSzy7E.png",
+    "gallery second card": "123OKdea8oPhNCq0uetsHB8OcDw.jpeg",
+    "RSVP background": "6f9AxarIs54UBYT1Lrm4ws9V764.webp"
+  },
+  "mapping_notes": [
+    "Corrected mapping: Rt8 is the lower background, CUxz the temple, sdAK the couple; composite as independently animated layers.",
+    "The opening opaque arch transition was removed as requested; its original pointer remains available but unused.",
+    "Instagram small photos show objects/portrait, not the couple. Kept mapping."
+  ]
+}
