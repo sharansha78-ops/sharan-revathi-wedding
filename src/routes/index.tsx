@@ -2,19 +2,27 @@ import { createFileRoute } from "@tanstack/react-router";
 import { WeddingSite } from "@/components/wedding/Wedding";
 import { wedding } from "@/config/wedding";
 
-const title = "Sharan & Revathi — Wedding Invitation · 14 Dec 2026";
-const description = `Join us for the wedding of ${wedding.groom.short} and ${wedding.bride.short} at ${wedding.venue.name}, ${wedding.venue.city}. Muhurtham ${wedding.muhurthamTime}, ${wedding.displayDate}.`;
+const SITE_URL = "https://sharan-revathi-wedding.vercel.app";
+const title = "💍 Sharan Kumar L V ❤️ Revathi P | Wedding Invitation";
+const description = `Join us on ${wedding.displayDate} at ${wedding.muhurthamTime} onwards to celebrate our Wedding at ${wedding.venue.name}, ${wedding.venue.city}.`;
+const imageUrl = `${SITE_URL}/share-cover.jpg`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title }, { name: "description", content: description },
-      { property: "og:title", content: title }, { property: "og:description", content: description },
-      { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
-      ...(wedding.artwork.preview.url.startsWith('https://') ? [
-        { property: "og:image", content: wedding.artwork.preview.url },
-        { name: "twitter:image", content: wedding.artwork.preview.url },
-      ] : []),
+      { title },
+      { name: "description", content: description },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: imageUrl },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: imageUrl },
     ],
   }),
   component: WeddingSite,
