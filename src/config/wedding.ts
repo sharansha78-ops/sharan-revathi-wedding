@@ -72,6 +72,7 @@ export const wedding = {
     "/photos/engagement-2.jpg",
     "/photos/engagement-3.jpg",
     "/photos/engagement-4.jpg",
+    "/photos/engagement-5.jpg",
   ] as string[],
   events: [
     {
